@@ -102,105 +102,105 @@ namespace minesweeper
         }
         //code to create the numbers assigned to each square if a mine is adjacent
         public void createAdjacent(square[,] board){
-            for(int i = 0; i<boardSize;i++){
-                for(int j= 0; j<boardSize;j++){
+            for(int row = 0; row<boardSize;row++){
+                for(int col= 0; col<boardSize;col++){
                     /*find each mine on the board and add 1 to each adjacent square if it is within the gameboard
                     each if statement corresponds to one of the 8 square that are possibly around the mine
                     the if statements are set up to stop outofbounds exceptions*/
-                    if(board[i,j].getMine() == true){
+                    if(board[row,col].getMine() == true){
                         //top left
-                        if((i-1>=minBoardLocation) && (j-1>= minBoardLocation)){                            
-                            board[i-1,j-1].setAdjacent(board[i-1,j-1].getAdjacent()+1);
+                        if((row-1>=minBoardLocation) && (col-1>= minBoardLocation)){                            
+                            board[row-1,col-1].setAdjacent(board[row-1,col-1].getAdjacent()+1);
                         }
                         //middle left
-                        if((i-1>=minBoardLocation)){                            
-                            board[i-1,j].setAdjacent(board[i-1,j].getAdjacent()+1);
+                        if((row-1>=minBoardLocation)){                            
+                            board[row-1,col].setAdjacent(board[row-1,col].getAdjacent()+1);
                         }
                         //top middle
-                        if((j-1>= minBoardLocation)){                            
-                            board[i,j-1].setAdjacent(board[i,j-1].getAdjacent()+1);
+                        if((col-1>= minBoardLocation)){                            
+                            board[row,col-1].setAdjacent(board[row,col-1].getAdjacent()+1);
                         }
                         //bottom right
-                        if((i+1<boardSize)&&(j+1)<boardSize){
-                            board[i+1,j+1].setAdjacent(board[i+1,j+1].getAdjacent()+1);
+                        if((row+1<boardSize)&&(col+1)<boardSize){
+                            board[row+1,col+1].setAdjacent(board[row+1,col+1].getAdjacent()+1);
                         }
                         //middle right
-                        if((i+1<boardSize)){
-                            board[i+1,j].setAdjacent(board[i+1,j].getAdjacent()+1);
+                        if((row+1<boardSize)){
+                            board[row+1,col].setAdjacent(board[row+1,col].getAdjacent()+1);
                         }
                         //bottom middle
-                        if((j+1<boardSize)){
-                            board[i,j+1].setAdjacent(board[i,j+1].getAdjacent()+1);
+                        if((col+1<boardSize)){
+                            board[row,col+1].setAdjacent(board[row,col+1].getAdjacent()+1);
                         }
                         //bottom left
-                        if((i-1>=minBoardLocation)&&(j+1<boardSize)){
-                            board[i-1,j+1].setAdjacent(board[i-1,j+1].getAdjacent()+1);
+                        if((row-1>=minBoardLocation)&&(col+1<boardSize)){
+                            board[row-1,col+1].setAdjacent(board[row-1,col+1].getAdjacent()+1);
                         }
                         //top right
-                        if((j-1>=minBoardLocation)&&(i+1<boardSize)){
-                            board[i+1,j-1].setAdjacent(board[i+1,j-1].getAdjacent()+1);
+                        if((col-1>=minBoardLocation)&&(row+1<boardSize)){
+                            board[row+1,col-1].setAdjacent(board[row+1,col-1].getAdjacent()+1);
                         }                        
                     }
                 }
             }
         }
 
-        public void revealSquare(int x,int y){
-            board[x,y].setRevealed(true);
-            board[x,y].setBoxType("["+board[x,y].getAdjacent()+"]");
-            if(board[x,y].getFlag()==true){
-                board[x,y].setFlag(false);                
+        public void revealSquare(int row,int col){
+            board[row,col].setRevealed(true);
+            board[row,col].setBoxType("["+board[row,col].getAdjacent()+"]");
+            if(board[row,col].getFlag()==true){
+                board[row,col].setFlag(false);                
             }            
         }
-        public void openAllAround(int x,int y){
+        public void openAllAround(int row,int col){
             //takes in x,y and opens itself and the 8 spaces around it if they exist in the board
-            if(board[x,y].getAdjacent() == 0){
-                revealSquare(x,y);
-                if((x-1>=minBoardLocation) && (y-1>= minBoardLocation)){                    
-                    revealSquare(x-1,y-1);                                 
+            if(board[row,col].getAdjacent() == 0){
+                revealSquare(row,col);
+                if((row-1>=minBoardLocation) && (col-1>= minBoardLocation)){                    
+                    revealSquare(row-1,col-1);                                 
                 }
-                if((x-1>=minBoardLocation) && (y+1<boardSize)){
-                    revealSquare(x-1,y+1);                                    
+                if((row-1>=minBoardLocation) && (col+1<boardSize)){
+                    revealSquare(row-1,col+1);                                    
                 }
-                if((x+1<boardSize) && (y+1<boardSize)){                    
-                    revealSquare(x+1,y+1);                                  
+                if((row+1<boardSize) && (col+1<boardSize)){                    
+                    revealSquare(row+1,col+1);                                  
                 }
-                if((x+1<boardSize)&& (y-1>=minBoardLocation)){
-                    revealSquare(x+1,y-1);
+                if((row+1<boardSize)&& (col-1>=minBoardLocation)){
+                    revealSquare(row+1,col-1);
                 }
-                if(x+1<boardSize){
-                    revealSquare(x+1,y);
+                if(row+1<boardSize){
+                    revealSquare(row+1,col);
                 }
-                if(x-1>=minBoardLocation){
-                    revealSquare(x-1,y);
+                if(row-1>=minBoardLocation){
+                    revealSquare(row-1,col);
                 }
-                if(y+1<boardSize){
-                    revealSquare(x,y+1);
+                if(col+1<boardSize){
+                    revealSquare(row,col+1);
                 }
-                if(y-1>=minBoardLocation){
-                    revealSquare(x,y-1);
+                if(col-1>=minBoardLocation){
+                    revealSquare(row,col-1);
                 }
             }
             else{
-                revealSquare(x,y);
+                revealSquare(row,col);
             }
         }
         //loops through each square in the board finding all revealed 0s and then revealing every square around them
-        public void openAll(int x,int y){
+        public void openAll(int row,int col){
             //found that two passes one going from [0,0] to [boardsize-1,boardsize-1] then passing through going the reverse revealed most things
             //two passes of openAll reveals all I've tested. Probably a better way to do this thats accurate all the time with less time complexity 
-            openAllAround(x,y);
-            for(int i = 0;i<boardSize;i++){
-                for(int j = 0;j<boardSize;j++){
-                    if(board[i,j].getRevealed()==true){
-                        openAllAround(i,j);
+            openAllAround(row,col);
+            for(int rowFirstLoop = 0;rowFirstLoop<boardSize;rowFirstLoop++){
+                for(int colFirstLoop = 0;colFirstLoop<boardSize;colFirstLoop++){
+                    if(board[rowFirstLoop,colFirstLoop].getRevealed()==true){
+                        openAllAround(rowFirstLoop,colFirstLoop);
                     }
                 }
             }
-            for(int i = boardSize - 1; i >= 0; i--){
-                for(int j = boardSize - 1; j >= 0; j--){
-                    if(board[i,j].getRevealed()==true){
-                        openAllAround(i,j);
+            for(int rowSecondLoop = boardSize - 1; rowSecondLoop >= 0; rowSecondLoop--){
+                for(int colSecondLoop = boardSize - 1; colSecondLoop >= 0; colSecondLoop--){
+                    if(board[rowSecondLoop,colSecondLoop].getRevealed()==true){
+                        openAllAround(rowSecondLoop,colSecondLoop);
                     }
                 }
             }                      
@@ -210,9 +210,9 @@ namespace minesweeper
             int numberRevealed = 0;
 
             //check each square and count the number of revealed squares
-            for(int i=0;i<boardSize;i++){
-                for(int j=0;j<boardSize;j++){
-                    if(board[i,j].getRevealed()==true){
+            for(int row=0;row<boardSize;row++){
+                for(int col=0;col<boardSize;col++){
+                    if(board[row,col].getRevealed()==true){
                         numberRevealed++;
                     }
                 }
@@ -230,10 +230,10 @@ namespace minesweeper
 
         //used to show all the mines when you lose
         public void showMines(){
-            for(int i=0;i<boardSize;i++){
-                for(int j=0;j<boardSize;j++){
-                    if(board[i,j].getMine()==true){
-                        board[i,j].setBoxType("[x]");
+            for(int row=0;row<boardSize;row++){
+                for(int col=0;col<boardSize;col++){
+                    if(board[row,col].getMine()==true){
+                        board[row,col].setBoxType("[x]");
                     }
                 }
             }
@@ -242,9 +242,9 @@ namespace minesweeper
         //used to show how many mines are remaining relative to the number of flags you've created
         public void checkFlags(){
             int flags = 0;
-            for(int i=0;i<boardSize;i++){
-                for(int j=0;j<boardSize;j++){
-                    if(board[i,j].getFlag()==true){
+            for(int row=0;row<boardSize;row++){
+                for(int col=0;col<boardSize;col++){
+                    if(board[row,col].getFlag()==true){
                         flags++;
                     }
                 }
