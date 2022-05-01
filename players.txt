@@ -1,0 +1,10 @@
+
+Matthew
+Number of moves: 41
+Finished in: 303 seconds
+Number of mines: 10
+
+Matthew
+Number of moves: 29
+Finished in: 561 seconds
+Number of mines: 10
